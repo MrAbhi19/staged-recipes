@@ -32,6 +32,7 @@ requirements:
     - xorg-libxpm
     - xorg-libxrender
     - xorg-libxcb
+    - xorg-libxext
     - zlib
   run:
     - tk
@@ -40,6 +41,7 @@ requirements:
     - xorg-libxpm
     - xorg-libxrender
     - xorg-libxcb
+    - xorg-libxext
 
 tests:
   - script:
