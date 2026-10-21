@@ -1,0 +1,66 @@
+context:
+  name: xschem
+  version: "3.4.7"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/StefanSchippers/xschem/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 8f6c7165c38f528b6cbae8f9fae72cde3b765652df90597011a5f7b5e7fdb273
+
+build:
+  number: 0
+  skip:
+    - win
+    - osx
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - make
+    - pkg-config
+    - flex
+    - bison
+    - gawk
+  host:
+    - tk
+    - cairo
+    - xorg-libx11
+    - xorg-libxpm
+    - xorg-libxrender
+    - xorg-libxcb
+    - zlib
+  run:
+    - tk
+    - cairo
+    - xorg-libx11
+    - xorg-libxpm
+    - xorg-libxrender
+    - xorg-libxcb
+
+tests:
+  - script:
+      # Verify binary links properly and prints version/help without needing an X11 display
+      - xschem --version
+      - xschem --help
+
+about:
+  homepage: https://xschem.sourceforge.io/stefan/
+  repository: https://github.com/StefanSchippers/xschem
+  documentation: https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html
+  summary: 'Schematic capture and netlisting EDA tool for VLSI/ASIC/Analog custom designs'
+  description: |
+    Xschem is a schematic capture program that allows creation of hierarchical
+    representation of circuits with a top-down approach. By focusing on
+    interfaces, hierarchy, and instance properties, a complex system can be
+    described in terms of simpler building blocks. A VHDL, Verilog, or Spice
+    netlist can be generated from the drawn schematic, allowing circuit simulation.
+  license: GPL-2.0-or-later
+  license_file: License
+
+extra:
+  recipe-maintainers:
+    - MrAbhi19
